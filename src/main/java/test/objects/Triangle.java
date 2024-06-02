@@ -42,7 +42,7 @@ public class Triangle {
         return TriangleCategory.SCALENE.ordinal();
     }
 
-    // 主函数用于测试
+    // 主函数, 下面不是测试用例! 测试直接调用上方函数得到结果
     public static void main(String[] args) {
         int a = 3;
         int b = 4;

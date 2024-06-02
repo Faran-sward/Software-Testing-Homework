@@ -73,6 +73,7 @@ public class TestCaseExecutor {
                 System.out.println("    Parameter in this method: " + param);
             }
         }
+        testCase.print();
 
         // 打印比较结果
         System.out.println("Comparison results:");
@@ -81,6 +82,7 @@ public class TestCaseExecutor {
         }
     }
 
+    // 暂时没用
     private void findMethodParameters(Class<?> clazz) {
         // 创建一个字典来存储方法和参数列表的映射
         methodParameterMap = new HashMap<>();
