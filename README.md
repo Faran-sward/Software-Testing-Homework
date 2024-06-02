@@ -2,7 +2,7 @@
 
 存储在`src\main\java\test\cases`文件夹下, 为`.xlsx`等Excel文件:
 
-![img](/home/asahi/project/Java/Software-Testing-Homework/img/img.png)
+![img](img/img.png)
 
 - 第一行: 标题行, 对应代码中的`titleRow`, 一般记录待测试代码的类路径和方法
 - 第二至三行: 表头, 对应代码中的`headers`, 
@@ -21,4 +21,4 @@
 
 传参: `src/main/java/test/cases/ex1.xlsx`
 
-![img_1](/home/asahi/project/Java/Software-Testing-Homework/img/img_1.png)
+![img_1](img/img_1.png)
