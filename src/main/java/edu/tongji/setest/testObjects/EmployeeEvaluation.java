@@ -1,4 +1,4 @@
-package test.objects;
+package edu.tongji.setest.testObjects;
 
 /**
  * @author asahi

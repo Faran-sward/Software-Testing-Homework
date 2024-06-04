@@ -1,4 +1,4 @@
-package utils;
+package edu.tongji.setest.utils;
 
 import java.io.IOException;
 import java.util.ArrayList;

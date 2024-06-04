@@ -1,15 +1,17 @@
-import lombok.Getter;
-import utils.DataConverter;
-import utils.ExcelData;
-import utils.TypeConverter;
+package edu.tongji.setest.utils.testCase;
 
-import javax.validation.constraints.Null;
+import lombok.Getter;
+import edu.tongji.setest.utils.DataConverter;
+import edu.tongji.setest.utils.ExcelData;
+import edu.tongji.setest.utils.TypeConverter;
+
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static utils.DataConverter.convertToMethodData;
+import static edu.tongji.setest.utils.DataConverter.convertToMethodData;
 
 /**
  * @author asahi
@@ -20,8 +22,8 @@ import static utils.DataConverter.convertToMethodData;
  */
 @Getter
 public class TestCase {
-    private final String methodName;
-    private final String className;
+//    private final String methodName;
+//    private final String className;
     private final List<String> paramsTypeName;
     private final String resultTypeName;
     private final Class<?>[] parameterTypes;
@@ -31,15 +33,34 @@ public class TestCase {
     public TestCase (String filePath) throws IOException {
         ExcelData excelData = new ExcelData(filePath);
 
-        // 读取待测试对象名称
-        List<String> titleRow = excelData.getTitleRow();
-        if (titleRow.size() > 1) {
-            methodName = titleRow.get(1);
-        }
-        else{
-            methodName = titleRow.get(0);
-        }
-        className = titleRow.get(0);
+//        // 读取待测试对象名称
+//        List<String> titleRow = excelData.getTitleRow();
+//        if (titleRow.size() > 1) {
+//            methodName = titleRow.get(1);
+//        }
+//        else{
+//            methodName = titleRow.get(0);
+//        }
+//        className = titleRow.get(0);
+
+        // 读取类型
+        List<List<String>> headers = excelData.getHeaders();
+        List<String> lastRow = headers.get(headers.size() - 1);
+        paramsTypeName = lastRow.subList(0, lastRow.size() - 2);
+        resultTypeName = lastRow.get(lastRow.size() - 2);
+
+        // 类型转换
+        parameterTypes = TypeConverter.convertToClassList(paramsTypeName).toArray(new Class[0]);
+        resultType = TypeConverter.convertToClass(resultTypeName);
+
+        // 数据类型转换
+        List<Map<String, Object>> data = excelData.getData();
+        List<String> DataMap = excelData.getDataMap();
+        DataList = convertToMethodData(data, DataMap, parameterTypes, resultType);
+    }
+
+    public TestCase (InputStream file) throws Exception {
+        ExcelData excelData = new ExcelData(file);
 
         // 读取类型
         List<List<String>> headers = excelData.getHeaders();
@@ -58,10 +79,10 @@ public class TestCase {
     }
 
     public void print () {
-        System.out.println("Class Name:");
-        System.out.println(className);
-        System.out.println("Method Name:");
-        System.out.println(methodName);
+//        System.out.println("Class Name:");
+//        System.out.println(className);
+//        System.out.println("Method Name:");
+//        System.out.println(methodName);
 
         System.out.println("Parameter Types:");
         System.out.println(paramsTypeName);
@@ -85,7 +106,7 @@ public class TestCase {
      * @return
      **/
     public static void main(String[] args) throws IOException {
-        String filePath = "/home/asahi/project/Java/Software-Testing-Homework/src/main/java/test/cases/ex1.xlsx";
+        String filePath = "/home/asahi/project/Java/Software-Testing-Homework/cases/ex1.xlsx";
 
         TestCase testCase = new TestCase(filePath);
 

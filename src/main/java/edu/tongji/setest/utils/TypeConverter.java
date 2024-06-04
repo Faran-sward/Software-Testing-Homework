@@ -1,4 +1,4 @@
-package utils;
+package edu.tongji.setest.utils;
 import java.util.ArrayList;
 import java.util.List;
 /**
