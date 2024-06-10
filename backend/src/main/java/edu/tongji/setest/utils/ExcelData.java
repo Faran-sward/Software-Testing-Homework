@@ -97,11 +97,11 @@ public class ExcelData {
      * @param args
      * @return
      **/
-    public static void main(String[] args) throws IOException {
+//    public static void main(String[] args) throws IOException {
 //        String filePath = "/home/asahi/project/Java/Software-Testing-Homework/src/main/java/test/cases/ex1.xlsx";
 //
 //        ExcelData excelData = new ExcelData(filePath);
 //
 //        excelData.print();
-    }
+//    }
 }

@@ -184,13 +184,12 @@ public class TestCaseExecutor {
         }
     }
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-        String filePath = "/home/asahi/project/Java/Software-Testing-Homework/cases/ex1.xlsx";
-        TestCaseExecutor executor = new TestCaseExecutor(filePath, "Triangle");
-        System.out.println(executor.getMethods("Triangle"));
-        executor.print();
-        List<Boolean> result = executor.execute("getTriangleType");
-        TestCaseExecutor.printResult(result);
-
-    }
+//    public static void main(String[] args) throws IOException, ClassNotFoundException {
+//        String filePath = "/home/asahi/project/Java/Software-Testing-Homework/cases/ex1.xlsx";
+//        TestCaseExecutor executor = new TestCaseExecutor(filePath, "Triangle");
+//        System.out.println(executor.getMethods("Triangle"));
+//        executor.print();
+//        List<Boolean> result = executor.execute("getTriangleType");
+//        TestCaseExecutor.printResult(result);
+//    }
 }

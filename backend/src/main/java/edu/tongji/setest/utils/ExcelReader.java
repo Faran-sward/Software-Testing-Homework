@@ -127,32 +127,32 @@ public class ExcelReader {
      * @param args
      * @return
      **/
-    public static void main(String[] args) {
-        String filePath = "/home/asahi/project/Java/Software-Testing-Homework/src/main/java/test/cases/ex1.xlsx";
-        int headRows = 2; // 假设有2行头行
-
-        try {
-//            // 读取标题行内容
-//            List<String> titleRow = readTitleRow(filePath);
-//            System.out.println("Title Row:");
-//            System.out.println(titleRow);
-
-            // 读取头行内容
-            List<List<String>> headers = readHeaders(filePath, headRows);
-            System.out.println("Headers:");
-            for (List<String> headerRow : headers) {
-                System.out.println(headerRow);
-            }
-
-            // 读取数据内容
-            List<Map<String, Object>> data = readData(filePath, headRows);
-            System.out.println("Data:");
-            for (Map<String, Object> row : data) {
-                System.out.println(row);
-            }
-
-        } catch (IOException e) {
-//            e.printStackTrace();
-        }
-    }
+//    public static void main(String[] args) {
+//        String filePath = "/home/asahi/project/Java/Software-Testing-Homework/src/main/java/test/cases/ex1.xlsx";
+//        int headRows = 2; // 假设有2行头行
+//
+//        try {
+////            // 读取标题行内容
+////            List<String> titleRow = readTitleRow(filePath);
+////            System.out.println("Title Row:");
+////            System.out.println(titleRow);
+//
+//            // 读取头行内容
+//            List<List<String>> headers = readHeaders(filePath, headRows);
+//            System.out.println("Headers:");
+//            for (List<String> headerRow : headers) {
+//                System.out.println(headerRow);
+//            }
+//
+//            // 读取数据内容
+//            List<Map<String, Object>> data = readData(filePath, headRows);
+//            System.out.println("Data:");
+//            for (Map<String, Object> row : data) {
+//                System.out.println(row);
+//            }
+//
+//        } catch (IOException e) {
+////            e.printStackTrace();
+//        }
+//    }
 }

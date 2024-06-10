@@ -105,11 +105,11 @@ public class TestCase {
      * @param args
      * @return
      **/
-    public static void main(String[] args) throws IOException {
-        String filePath = "/home/asahi/project/Java/Software-Testing-Homework/cases/ex1.xlsx";
-
-        TestCase testCase = new TestCase(filePath);
-
-        testCase.print();
-    }
+//    public static void main(String[] args) throws IOException {
+//        String filePath = "/home/asahi/project/Java/Software-Testing-Homework/cases/ex1.xlsx";
+//
+//        TestCase testCase = new TestCase(filePath);
+//
+//        testCase.print();
+//    }
 }

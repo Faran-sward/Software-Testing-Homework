@@ -84,37 +84,37 @@ public class DataConverter {
      * @param args
      * @return
      **/
-    public static void main(String[] args) throws IOException {
-        String filePath = "/home/asahi/project/Java/Software-Testing-Homework/src/main/java/test/cases/ex1.xlsx";
-
-        ExcelData excelData = new ExcelData(filePath);
-
-        excelData.print();
-
-        List<List<String>> headers = excelData.getHeaders();
-        List<String> dataMap = excelData.getDataMap();
-        List<Map<String, Object>> data = excelData.getData();
-
-        // 读取类型
-        List<String> lastRow = headers.get(headers.size() - 1);
-        List<String> input = lastRow.subList(0, lastRow.size() - 2);
-        String output = lastRow.get(lastRow.size() - 2);
-        System.out.println("Last Row (Parameter Types):");
-        System.out.println(input);
-
-        // 假设已经知道了输入类型 parameterTypes 和输出类型 resultType
-        Class<?>[] parameterTypes = TypeConverter.convertToClassList(input).toArray(new Class[0]); // 替换为实际的输入类型
-        Class<?> resultType = TypeConverter.convertToClass(output); // 替换为实际的输出类型
-
-        // 转换数据为相应格式
-        List<MethodData> methodDataList = convertToMethodData(data, dataMap, parameterTypes, resultType);
-
-        // 打印转换后的数据
-        for (MethodData methodData : methodDataList) {
-            System.out.println("Parameters: " + Arrays.toString(methodData.getParameters()));
-            System.out.println("Result: " + methodData.getResult());
-            System.out.println();
-        }
-    }
+//    public static void main(String[] args) throws IOException {
+//        String filePath = "/home/asahi/project/Java/Software-Testing-Homework/src/main/java/test/cases/ex1.xlsx";
+//
+//        ExcelData excelData = new ExcelData(filePath);
+//
+//        excelData.print();
+//
+//        List<List<String>> headers = excelData.getHeaders();
+//        List<String> dataMap = excelData.getDataMap();
+//        List<Map<String, Object>> data = excelData.getData();
+//
+//        // 读取类型
+//        List<String> lastRow = headers.get(headers.size() - 1);
+//        List<String> input = lastRow.subList(0, lastRow.size() - 2);
+//        String output = lastRow.get(lastRow.size() - 2);
+//        System.out.println("Last Row (Parameter Types):");
+//        System.out.println(input);
+//
+//        // 假设已经知道了输入类型 parameterTypes 和输出类型 resultType
+//        Class<?>[] parameterTypes = TypeConverter.convertToClassList(input).toArray(new Class[0]); // 替换为实际的输入类型
+//        Class<?> resultType = TypeConverter.convertToClass(output); // 替换为实际的输出类型
+//
+//        // 转换数据为相应格式
+//        List<MethodData> methodDataList = convertToMethodData(data, dataMap, parameterTypes, resultType);
+//
+//        // 打印转换后的数据
+//        for (MethodData methodData : methodDataList) {
+//            System.out.println("Parameters: " + Arrays.toString(methodData.getParameters()));
+//            System.out.println("Result: " + methodData.getResult());
+//            System.out.println();
+//        }
+//    }
 }
 
