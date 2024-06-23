@@ -66,6 +66,11 @@ public class ExcelReader {
 
     public static List<List<String>> readHeaders(String filePath, int headRows) throws IOException {
         List<List<String>> headers = new ArrayList<>();
+        // 获取当前工作目录
+        String workingDir = System.getProperty("user.dir");
+
+        // 打印当前工作目录
+        System.out.println("当前工作目录: " + workingDir);
 
         try (FileInputStream fis = new FileInputStream(new File(filePath));
              Workbook workbook = WorkbookFactory.create(fis)) {

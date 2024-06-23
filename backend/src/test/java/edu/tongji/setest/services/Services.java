@@ -32,6 +32,11 @@ public class Services {
         executor = new TestCaseExecutor(file, className);
     }
 
+    public void uploadCase(String file) throws Exception {
+        executor = new TestCaseExecutor(file, className);
+    }
+
+
     public List<String> getMethods(String className) throws ClassNotFoundException {
         return TestCaseExecutor.getMethods(className);
     }

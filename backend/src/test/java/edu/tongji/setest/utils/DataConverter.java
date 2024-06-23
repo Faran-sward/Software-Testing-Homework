@@ -1,6 +1,12 @@
 package edu.tongji.setest.utils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.mockito.Mockito;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,17 +29,26 @@ public class DataConverter {
         List<MethodData> methodDataList = new ArrayList<>();
 
         for (Map<String, Object> data : dataList) {
+            boolean flag = false;
+
             // 获取输入参数
             Object[] parameters = new Object[parameterTypes.length];
             for (int i = 0; i < parameterTypes.length; i++) {
+
                 parameters[i] = convertToType(data.get(dataMap.get(i)), parameterTypes[i]);
+                if (parameters[i] != null)
+                    flag = true;
             }
 
+
             // 获取输出结果
-            Object result = convertToType(data.get(dataMap.get(parameterTypes.length)), resultType);
+            Object result = null;
+            if (resultType != void.class)
+                result = convertToType(data.get(dataMap.get(parameterTypes.length)), resultType);
 
             // 创建 MethodData 对象并添加到列表中
-            methodDataList.add(new MethodData(parameters, result));
+            if (flag)
+                methodDataList.add(new MethodData(parameters, result));
         }
 
         return methodDataList;
@@ -44,19 +59,52 @@ public class DataConverter {
             return null;
         }
 
-        if (type == Integer.class || type == int.class) {
-            return Integer.parseInt(value.toString());
-        } else if (type == Double.class || type == double.class) {
-            return Double.parseDouble(value.toString());
-        } else if (type == Boolean.class || type == boolean.class) {
-            return Boolean.parseBoolean(value.toString());
-        } else if (type == String.class) {
-            return value.toString();
-        } else {
-            // 如果类型不是基本数据类型或字符串，可能需要根据具体情况进行转换
-            return value;
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            if (type.isArray()) {
+                // 获取数组的组件类型
+                Class<?> componentType = type.getComponentType();
+                if (componentType == MultipartFile.class) {
+                    // 生成一个mock的MultipartFile数组
+                    int length = Integer.parseInt(value.toString());
+                    MultipartFile[] files = new MultipartFile[length];
+                    for (int i = 0; i < length; i++) {
+                        files[i] = Mockito.mock(MultipartFile.class);
+                    }
+                    return files;
+                } else {
+                    // 将 JSON 字符串转换为相应类型的数组
+                    return mapper.readValue(value.toString(), mapper.getTypeFactory().constructArrayType(componentType));
+                }
+            }
+
+            if (type == MultipartFile.class) {
+                // 生成一个mock的MultipartFile
+                return Mockito.mock(MultipartFile.class);
+            } else if (type == Integer.class || type == int.class) {
+                return Integer.parseInt(value.toString());
+            } else if (type == Double.class || type == double.class) {
+                return Double.parseDouble(value.toString());
+            } else if (type == Boolean.class || type == boolean.class) {
+                return Boolean.parseBoolean(value.toString());
+            } else if (type == String.class) {
+                return value.toString();
+            } else if (type == BigDecimal.class) {
+                return new BigDecimal(value.toString());
+            } else if (type == Date.class) {
+                return Date.valueOf(value.toString());
+            } else {
+                // 如果类型不是基本数据类型或字符串，可能需要根据具体情况进行转换
+                return value;
+            }
+        } catch (Exception e) {
+            System.err.println("Error converting value to type: " + type.getSimpleName());
+            e.printStackTrace();
+            return null;
         }
     }
+
 
     public static class MethodData {
         private Object[] parameters;

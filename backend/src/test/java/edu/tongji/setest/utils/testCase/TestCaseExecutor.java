@@ -1,7 +1,7 @@
 package edu.tongji.setest.utils.testCase;
 
-import lombok.Getter;
 import edu.tongji.setest.utils.DataConverter;
+import lombok.Getter;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,14 +27,14 @@ public class TestCaseExecutor {
     private final Class<?> clazz;
 //    private Map<String, List<String>> methodParameterMap;
     private final TestCase testCase;
-    public static final String clazzRootPath = "edu.tongji.setest.testObjects.";
+    public static final String clazzRootPath = "testObjects.";
 
     public TestCaseExecutor (String caseFilePath, String className) throws IOException, ClassNotFoundException {
         testCase = new TestCase(caseFilePath);
 
         String clazzPath = clazzRootPath + className;
         clazz = findClassByName(clazzPath);
-        findMethodParameters(clazz);
+//        findMethodParameters(clazz);
     }
 
     public TestCaseExecutor (InputStream caseFile, String className) throws Exception, ClassNotFoundException {
