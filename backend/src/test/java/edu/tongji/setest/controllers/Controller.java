@@ -1,5 +1,6 @@
 package edu.tongji.setest.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import edu.tongji.setest.services.Services;
 import edu.tongji.setest.utils.testCase.TestCaseExecutor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -127,15 +128,15 @@ public class Controller {
     }
 
     @GetMapping("/execute")
-    public ResponseEntity<List<Boolean>> executeCase(@RequestParam String methodName) {
-        List<Boolean> executionResult = services.executeCase(methodName);
+    public ResponseEntity<String> executeCase(@RequestParam String methodName) throws JsonProcessingException {
+        String executionResult = services.executeCase(methodName);
 
         return ResponseEntity.ok(executionResult);
     }
 
     @GetMapping("/default")
-    public ResponseEntity<List<Boolean>> executeDefaultCase(@RequestParam String className, int method) throws Exception {
-        List<Boolean> executionResult = new ArrayList<>();
+    public ResponseEntity<String> executeDefaultCase(@RequestParam String className, int method) throws Exception {
+        String executionResult = "new ArrayList<>();";
         if (Objects.equals(className, "三角形")) {
             services.chooseClass("Triangle");
             System.out.println("class :" + className);

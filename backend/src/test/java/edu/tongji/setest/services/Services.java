@@ -1,5 +1,6 @@
 package edu.tongji.setest.services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import edu.tongji.setest.utils.ScriptPackageManager;
 import org.springframework.stereotype.Service;
 import edu.tongji.setest.utils.testCase.TestCaseExecutor;
@@ -45,7 +46,7 @@ public class Services {
         return TestCaseExecutor.getClasses();
     }
 
-    public List<Boolean> executeCase(String methodName) {
+    public String executeCase(String methodName) throws JsonProcessingException {
         return executor.execute(methodName);
     }
 
