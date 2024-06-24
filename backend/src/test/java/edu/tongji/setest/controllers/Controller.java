@@ -3,6 +3,7 @@ package edu.tongji.setest.controllers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import edu.tongji.setest.services.Services;
 import edu.tongji.setest.utils.testCase.TestCaseExecutor;
+import edu.tongji.setest.utils.testRunner.TestRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -176,5 +177,10 @@ public class Controller {
         return ResponseEntity.ok(executionResult);
     }
 
+    @GetMapping("/unit-test")
+    public ResponseEntity<String> unitTest() throws JsonProcessingException {
+        String executionResult = TestRunner.runAllTests("cn.tju.sse.spring_backend");
+        return ResponseEntity.ok(executionResult);
+    }
 }
 
